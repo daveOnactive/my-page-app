@@ -1,0 +1,33 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "node",
+    "promise"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+    // "project": ["../tsconfig.base.json"]
+  },
+  "rules": {
+    "@typescript-eslint/no-var-requires": "off",
+    "no-var": "error",
+    "semi": "error",
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "no-multi-spaces": "error",
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error",
+    "quotes": ["error", "single"]
+  }
+}
