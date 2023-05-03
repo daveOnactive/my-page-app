@@ -1,9 +1,11 @@
 import express, { Request, Response } from 'express';
 import { connectRoutes} from './routes/connectRoutes';
 import bodyParser from 'body-parser';
+import dotEnv from 'dotenv';
 
+dotEnv.config();
 export const app = express();
-const port = 3000;
+const port = 4000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
