@@ -6,7 +6,11 @@ import { publishApi } from '../api';
 export const connectRoutes = () => {
   app.use('/app/publish', publishApi);
 
-  app.use('/', (req: Request, res: Response) => {
+  app.use('/', (_req: Request, res: Response) => {
     res.send('Welcome to MY PAGE 1.0');
+  });
+
+  app.use('*', (_req: Request, res: Response) => {
+    res.status(404).send('Not found');
   });
 };
