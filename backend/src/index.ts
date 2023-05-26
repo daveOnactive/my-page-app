@@ -1,11 +1,12 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { connectRoutes} from './routes/connectRoutes';
 import bodyParser from 'body-parser';
 import dotEnv from 'dotenv';
+import { errorHandler } from './middlewares';
+import { PORT } from './utils/constants';
 
 dotEnv.config();
 export const app = express();
-const port = 4000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -13,13 +14,8 @@ app.use(express.json());
 
 connectRoutes();
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
 
-app.use((err: any, req: Request, res: Response) => {
-  // console.error(err.stack);
-  const statusCode = err.status || 500;
-  const message = err.message || 'Internal Server Error';
-  res.status(statusCode).json({ message });
-});
+app.use(errorHandler);
