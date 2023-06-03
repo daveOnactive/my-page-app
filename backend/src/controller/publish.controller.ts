@@ -1,21 +1,49 @@
 import { Request, Response, NextFunction } from 'express';
-import { PublishService } from '../services/publish.service';
-import { HttpError } from '../utils/helpers';
-import { StatusCode, ErrorMessage } from '../utils/constants';
+import { PublishService, GithubService, VercelService } from '../services';
+import { StatusCode } from '../utils/constants';
+import { componentBuilder } from '../libs';
 
 export class PublishController {
 
   async createDeploy(req: Request, res: Response, next: NextFunction) {
-    const publishService = new PublishService();
-    console.log(Object.entries(req.body).length);
+    const fileName = 'page';
+    const ext = '.tsx';
+    const pageContent = componentBuilder();
+    const deploymentName = 'testing-deployment';
+    const githubService = new GithubService();
+    const vercelService = new VercelService();
+    const publishService = new PublishService(fileName, pageContent, ext);
+    let deploymentId = 'RUNNING_ON_DEV_ENV';
     try {
-      if (!Object.entries(req.body).length) {
-        throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);
+      if (process.env.NODE_ENV !== 'dev') {
+        await githubService.createFile(fileName, pageContent, ext);
+        const { data } = await vercelService.createDeployment(deploymentName);
+        deploymentId = data.id;
+      } else {
+        await publishService.publishProject();
       }
-      
-      await publishService.publishProject();
 
-      res.status(StatusCode.SUCCESS).json(req.body);
+      res.status(StatusCode.SUCCESS).json({
+        message: 'Deployment is created and in progress...',
+        deploymentId,
+      });
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteDeploy(req: Request, res: Response, next: NextFunction) {
+ 
+    const vercelService = new VercelService();
+    try {
+
+      const deploymentId = req.params.deploymentId;
+      await vercelService.deleteDeployment(deploymentId);
+
+      res.status(StatusCode.SUCCESS).json({
+        message: 'Deleted deployment successfully.',
+      });
 
     } catch (error) {
       next(error);

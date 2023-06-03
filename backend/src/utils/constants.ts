@@ -15,6 +15,10 @@ export enum ErrorMessage {
   INTERNAL_SERVER_ERROR = 'Internal Server Error',
 }
 
+export enum SuccessMessage {
+  
+}
+
 export const PORT = 3000;
 
 export const ENDPOINT_ENTRY = '/app';
