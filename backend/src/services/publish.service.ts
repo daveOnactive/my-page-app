@@ -20,9 +20,7 @@ export class PublishService {
   private async createFile() {
     const file = `${this.fileName}${this.ext}`;
 
-    console.log(file);
-
-    const filePath = path.join(__dirname, '../../../app-shell/src/app', file);
+    const filePath = path.join(__dirname, '../../../app-shell/src/app/', file);
 
     try {
       await fs.writeFile(filePath, this.fileContent);
