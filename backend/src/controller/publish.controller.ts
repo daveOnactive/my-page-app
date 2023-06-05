@@ -6,10 +6,11 @@ import { componentBuilder } from '../libs';
 export class PublishController {
 
   async createDeploy(req: Request, res: Response, next: NextFunction) {
-    const fileName = 'page';
+    const { body } = req;
+    const fileName = body.fileName;
     const ext = '.tsx';
     const pageContent = componentBuilder();
-    const deploymentName = 'testing-deployment';
+    const deploymentName = body.name;
     const githubService = new GithubService();
     const vercelService = new VercelService();
     const publishService = new PublishService(fileName, pageContent, ext);
