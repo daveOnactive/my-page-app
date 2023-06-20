@@ -1,0 +1,1 @@
+export { VercelDeploymentBody } from './vercelDeploymentBody';
