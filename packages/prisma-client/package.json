@@ -1,5 +1,5 @@
 {
-  "name": "@my-page/libs",
+  "name": "@my-page/prisma-client",
   "version": "1.0.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "prisma": "^4.16.0"
   }
 }
