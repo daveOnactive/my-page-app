@@ -1,21 +1,20 @@
-import express from 'express';
-import { connectRoutes} from './routes/connectRoutes';
-import bodyParser from 'body-parser';
-import dotEnv from 'dotenv';
-import { errorHandler } from './middlewares';
-import { PORT } from './utils/constants';
+require('dotenv').config();
 
-dotEnv.config();
+import express from 'express';
+import { connectRoutes} from './routes/connect-routes';
+import bodyParser from 'body-parser';
+import { errorHandler } from './middlewares';
+
 export const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.json());
 
 connectRoutes();
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
-
-app.use(errorHandler);
