@@ -5,6 +5,10 @@ import { HttpError } from '../utils/helpers';
 export const errorHandler = (err: HttpError, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
 
+  if (err.message.toLowerCase() === ErrorMessage.UNAUTHORIZED.toLowerCase() && err.status === StatusCode.UNAUTHORIZED) {
+    return res.status(err.status).json({ message: err.message });
+  }
+
   if (err instanceof HttpError) {
     return res.status(err.status).json({ message: err.message });
   }

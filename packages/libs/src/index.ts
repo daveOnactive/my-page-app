@@ -1,8 +1,8 @@
 //functions
-export { addHtmlRoot } from './addHtmlRoot';
-export { convertToHTML } from './convertTreeToHtml';
+export { addHtmlRoot } from './add-html-root';
+export { convertToHTML } from './convert-tree-To-html';
 
 // types
-export type { ElementProps, ElementTree } from './elementTree.type';
+export type { ElementProps, ElementTree } from './element-tree.type';
 
-//enmus
+//enums

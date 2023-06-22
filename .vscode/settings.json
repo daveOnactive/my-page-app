@@ -1,7 +1,8 @@
 {
   "cSpell.words": [
     "ENDPOINTENTRY",
-    "middlewares"
+    "middlewares",
+    "oidc"
   ],
   "editor.formatOnSave": true,
   "editor.tabSize": 2,

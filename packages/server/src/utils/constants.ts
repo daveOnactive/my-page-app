@@ -19,6 +19,4 @@ export enum SuccessMessage {
   
 }
 
-export const PORT = 3000;
-
 export const ENDPOINT_ENTRY = '/app';

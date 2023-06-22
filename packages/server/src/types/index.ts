@@ -1,1 +1,1 @@
-export { VercelDeploymentBody } from './vercelDeploymentBody';
+export { VercelDeploymentBody } from './vercel-deployment-body';
