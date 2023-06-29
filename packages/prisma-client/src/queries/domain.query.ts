@@ -3,7 +3,8 @@ import { prisma } from '../index';
 type Domain = {
   name: string;
   status: number;
-  userId: number
+  userId: number;
+  projectId: number;
 }
 
 export const createDomain = async (data: Domain) => {

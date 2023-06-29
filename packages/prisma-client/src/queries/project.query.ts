@@ -6,6 +6,25 @@ export const getProjectById = async (id: number) => {
   return await prisma.project.findUnique({
     where: {
       id,
+    },
+  });
+};
+
+export const getProjectWithDomainById = async (id: number) => {
+  return await prisma.project.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      domain: true,
+    },
+  });
+};
+
+export const getUserProject = async (userId: number) => {
+  return await prisma.project.findMany({
+    where: {
+      userId,
     }
   });
 };

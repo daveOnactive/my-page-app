@@ -4,6 +4,7 @@ import express from 'express';
 import { connectRoutes} from './routes/connect-routes';
 import bodyParser from 'body-parser';
 import { errorHandler } from './middlewares';
+import { ENDPOINT_ENTRY } from './utils/constants';
 
 export const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-connectRoutes();
+connectRoutes(ENDPOINT_ENTRY);
 
 app.use(errorHandler);
 
