@@ -4,5 +4,5 @@ import { publishValidator } from '../validators';
 
 export const publishApi = express.Router();
 
-publishApi.post('/', publishValidator, publishController.createDeploy);
-publishApi.delete('/:deploymentId', publishController.deleteDeploy);
+publishApi.post('/:projectId', publishController.createDeploy);
+publishApi.delete('/:projectId', publishController.deleteDeploy);
