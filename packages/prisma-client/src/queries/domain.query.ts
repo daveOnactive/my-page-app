@@ -23,6 +23,25 @@ export const getDomainById = async (id: number) => {
   });
 };
 
+export const getUserDomain = async (userId: number) => {
+  return await prisma.domain.findMany({
+    where: {
+      userId,
+    }
+  });
+};
+
+export const getDomainAndProjectByUserId = async (userId: number) => {
+  return await prisma.domain.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      project: true,
+    }
+  });
+};
+
 export const updateDomain = async (id: number, data: Domain) => {
   return await prisma.domain.update({
     where: {

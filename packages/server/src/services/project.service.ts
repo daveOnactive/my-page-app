@@ -1,7 +1,7 @@
 import { createProject, updateProject, getProjectById, getUserProject, deleteProject, getProjectWithDomainById } from '@my-page/prisma-client';
 import { ErrorMessage, StatusCode } from '../utils/constants';
 import { HttpError } from '../utils/helpers';
-import { Project } from '../types/project';
+import { Project } from '../model/project.model';
 
 export class ProjectService {
   async createProject(requestBody: Project) {
