@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import { app } from '../index';
-import { publishApi, projectApi } from '../api';
+import { publishApi, projectApi, domainApi } from '../api';
 
 
 export const connectRoutes = (endpointEntry: string) => {
+  app.use(`${endpointEntry}/domain`, domainApi);
+
   app.use(`${endpointEntry}/project`, projectApi);
 
   app.use(`${endpointEntry}/publish`, publishApi);

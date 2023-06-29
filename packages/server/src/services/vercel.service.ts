@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { VercelDeploymentBody } from '../types';
+import { VercelDeploymentBody } from '../model';
 import { StatusCode } from '../utils/constants';
 import { HttpError } from '../utils/helpers';
 
