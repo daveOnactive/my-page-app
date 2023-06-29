@@ -27,6 +27,8 @@ export class ProjectService {
         status: requestBody.status,
         template: JSON.stringify(requestBody.tree),
         userId: requestBody.userId,
+        deploymentId: requestBody.deploymentId,
+        deploymentUrl: requestBody.deploymentUrl,
       });
 
       return project;
@@ -72,10 +74,10 @@ export class ProjectService {
     }
   }
 
-  async getProjectById(projectId: number) {
+  async getProjectById(projectId: number): Promise<Project> {
     try {
       const project = await getProjectWithDomainById(projectId);
-      return {...project, template: JSON.parse(project?.template || '')};
+      return {...project, tree: JSON.parse(project?.template || '')} as Project;
     } catch (error) {
       console.log(error);
       throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);

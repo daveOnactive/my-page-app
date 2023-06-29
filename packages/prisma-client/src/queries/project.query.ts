@@ -34,7 +34,9 @@ type Project = {
   status: number;
   template: string;
   domainId?: number;
-  userId: number
+  userId: number;
+  deploymentId?: string;
+  deploymentUrl?: string;
 }
 
 export const createProject = async (data: Project) => {

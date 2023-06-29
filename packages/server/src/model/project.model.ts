@@ -7,6 +7,6 @@ export type Project = {
   tree: ElementTree;
   userId: number;
   domain?: string;
-  deploymentId?: number;
+  deploymentId?: string;
   deploymentUrl?: string;
 }

@@ -14,10 +14,11 @@ export class VercelService {
   });
 
   async createDeployment(body: VercelDeploymentBody) {
-    const { name, files } = body;
+    const { name, files, deploymentId } = body;
 
     try {
       return await this.vercelApi.post('/', {
+        deploymentId,
         name,
         files,
         'projectSettings': {
