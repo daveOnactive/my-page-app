@@ -7,7 +7,7 @@ const schema = Joi.object({
   status: Joi.number().required(),
   userId: Joi.number().required(),
   projectId: Joi.number().required(),
-}).id('schema');
+});
 
 export const domainValidator = async (req: Request, res: Response, next: NextFunction) => {
   try {
