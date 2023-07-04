@@ -1,4 +1,5 @@
 import { prisma } from '..';
+import { User } from '../models';
 
 export const getAllUser = async () => await prisma.user.findMany();
 
@@ -10,10 +11,18 @@ export const getUserById = async (id: number) => {
   });
 };
 
-type User = {
-  email: string;
-  name?: string;
-}
+export const getUserByEmail = async (email: string) => {
+  try {
+    return await prisma.user.findUnique({
+      where: {
+        email,
+      }
+    });
+  } catch (err) {
+    throw err;
+  }
+  
+};
 
 export const createUser = async (data: User) => {
   return await prisma.user.create({
