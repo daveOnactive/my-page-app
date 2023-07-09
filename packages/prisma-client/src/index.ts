@@ -3,12 +3,10 @@ import { PrismaClient } from '@prisma/client';
 export const prisma = new PrismaClient();
 
 // Prisma queries
-export { createDomain, deleteDomain, getAllDomain, getDomainById, updateDomain, getDomainAndProjectByUserId, getUserDomain } from './queries/domain.query';
-
-export { getAllProject, createProject, deleteProject, getProjectById, updateProject, getUserProject, getProjectWithDomainById } from './queries/project.query';
+export { getAllProject, createProject, deleteProject, getProjectById, updateProject, getUserProject } from './queries/project.query';
 
 export { createUser, deleteUser, getAllUser, getUserById, updateUser, getUserByEmail } from './queries/user.query';
 
 // Models
-export { User } from './models';
+export { User, Project } from './models';
 
