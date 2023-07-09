@@ -17,7 +17,6 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^18.15.11",
     "nodemon": "^2.0.22",
-    "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },

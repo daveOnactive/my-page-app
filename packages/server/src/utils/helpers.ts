@@ -18,6 +18,12 @@ export class ExceptionHandler {
       throw new HttpError(err.message, StatusCode.BAD_REQUEST);
     }
   }
+
+  async throwIf(condition: boolean, message: string) {
+    if (condition) {
+      throw new HttpError(message, StatusCode.BAD_REQUEST);
+    }
+  }
 }
 
 export class ValidatorBuilder {
