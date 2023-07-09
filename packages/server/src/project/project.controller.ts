@@ -2,22 +2,27 @@ import { Request, Response, NextFunction} from 'express';
 import { ProjectService } from '../services';
 import { StatusCode } from '../utils/constants';
 
-export class ProjectController {
+class ProjectController {
+
+  static projectService: ProjectService;
+
+  constructor(projectService: ProjectService) {
+    ProjectController.projectService = projectService;
+  }
 
   async createProject(req: Request, res: Response, next: NextFunction) {
+
     try {
       const requestBody = {
         name: req.body.name,
         status: req.body.status,
-        tree: req.body.tree,
+        tree: JSON.stringify(req.body.tree),
         userId: req.body.userId,
       };
 
-      const projectService = new ProjectService();
+      const project = await ProjectController.projectService.createProject(requestBody);
 
-      const project = await projectService.createProject(requestBody);
-
-      return res.status(StatusCode.CREATED).json({
+      res.status(StatusCode.CREATED).json({
         data: project
       });
     } catch (error) {
@@ -30,15 +35,13 @@ export class ProjectController {
       const requestBody = {
         name: req.body.name,
         status: req.body.status,
-        tree: req.body.tree,
+        tree: JSON.stringify(req.body.tree),
         userId: req.body.userId,
       };
 
-      const projectService = new ProjectService();
+      const project = await ProjectController.projectService.updateProject(Number(req.params.projectId), requestBody);
 
-      const project = await projectService.updateProject(Number(req.params.projectId), requestBody);
-
-      return res.status(StatusCode.SUCCESS).json({
+      res.status(StatusCode.SUCCESS).json({
         data: project
       });
     } catch (error) {
@@ -48,9 +51,8 @@ export class ProjectController {
 
   async deleteProject(req: Request, res: Response, next: NextFunction) {
     try {
-      const projectService = new ProjectService();
-      const project = await projectService.deactivateProject(Number(req.params.projectId), Number(req.body.userId));
-      return res.status(StatusCode.SUCCESS).json({
+      const project = await ProjectController.projectService.deactivateProject(Number(req.params.projectId), Number(req.body.userId));
+      res.status(StatusCode.SUCCESS).json({
         data: project
       });
     } catch (error) {
@@ -60,9 +62,8 @@ export class ProjectController {
 
   async getProjects(req: Request, res: Response, next: NextFunction) {
     try {
-      const projectService = new ProjectService();
-      const projects = await projectService.getProjects(Number(req.body.userId));
-      return res.status(StatusCode.SUCCESS).json({
+      const projects = await ProjectController.projectService.getProjects(Number(req.body.userId));
+      res.status(StatusCode.SUCCESS).json({
         data: projects
       });
     } catch (error) {
@@ -72,9 +73,8 @@ export class ProjectController {
 
   async getProjectById(req: Request, res: Response, next: NextFunction) {
     try {
-      const projectService = new ProjectService();
-      const project = await projectService.getProjectById(Number(req.params.projectId));
-      return res.status(StatusCode.SUCCESS).json({
+      const project = await ProjectController.projectService.getProjectById(Number(req.params.projectId));
+      res.status(StatusCode.SUCCESS).json({
         data: project
       });
     } catch (error) {
@@ -82,3 +82,5 @@ export class ProjectController {
     }
   }
 }
+
+export const projectController = new ProjectController(new ProjectService);

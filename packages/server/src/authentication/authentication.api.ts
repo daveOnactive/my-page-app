@@ -1,6 +1,6 @@
 import express from 'express';
-import { authenticationController } from '../controller';
-import { authenticationValidator, resetPasswordValidator, forgotPasswordValidator } from '../validators';
+import { authenticationController } from './authentication.controller';
+import { authenticationValidator, resetPasswordValidator, forgotPasswordValidator } from './authentication.validator';
 
 export const authenticationApi = express.Router();
 

@@ -1,7 +1,6 @@
-import { createProject, updateProject, getProjectById, getUserProject, deleteProject, getProjectWithDomainById } from '@my-page/prisma-client';
+import { createProject, updateProject, getProjectById, getUserProject, deleteProject, Project } from '@my-page/prisma-client';
 import { ErrorMessage, StatusCode } from '../utils/constants';
 import { HttpError } from '../utils/helpers';
-import { Project } from '../model/project.model';
 
 export class ProjectService {
   async createProject(requestBody: Project) {
@@ -9,7 +8,7 @@ export class ProjectService {
       const project = await createProject({
         name: requestBody.name,
         status: requestBody.status,
-        template: JSON.stringify(requestBody.tree),
+        tree: requestBody.tree,
         userId: requestBody.userId,
       });
 
@@ -25,10 +24,11 @@ export class ProjectService {
       const project = await updateProject(projectId, {
         name: requestBody.name,
         status: requestBody.status,
-        template: JSON.stringify(requestBody.tree),
+        tree: requestBody.tree,
         userId: requestBody.userId,
         deploymentId: requestBody.deploymentId,
         deploymentUrl: requestBody.deploymentUrl,
+        vercelId: requestBody.vercelId,
       });
 
       return project;
@@ -45,7 +45,7 @@ export class ProjectService {
       return await updateProject(projectId, {
         name: project?.name || '',
         status: 0,
-        template: project?.template || '',
+        tree: project?.tree || '',
         userId: userId,
       });
     } catch (error) {
@@ -76,8 +76,8 @@ export class ProjectService {
 
   async getProjectById(projectId: number): Promise<Project> {
     try {
-      const project = await getProjectWithDomainById(projectId);
-      return {...project, tree: JSON.parse(project?.template || '')} as Project;
+      const project = await getProjectById(projectId);
+      return {...project, tree: JSON.parse(project?.tree || '')} as Project;
     } catch (error) {
       console.log(error);
       throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);

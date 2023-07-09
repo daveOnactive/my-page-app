@@ -1,4 +1,4 @@
-import { prisma } from '..';
+import { prisma, Project } from '..';
 
 export const getAllProject = async () => await prisma.project.findMany();
 
@@ -10,17 +10,6 @@ export const getProjectById = async (id: number) => {
   });
 };
 
-export const getProjectWithDomainById = async (id: number) => {
-  return await prisma.project.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      domain: true,
-    },
-  });
-};
-
 export const getUserProject = async (userId: number) => {
   return await prisma.project.findMany({
     where: {
@@ -28,16 +17,6 @@ export const getUserProject = async (userId: number) => {
     }
   });
 };
-
-type Project = {
-  name: string;
-  status: number;
-  template: string;
-  domainId?: number;
-  userId: number;
-  deploymentId?: string;
-  deploymentUrl?: string;
-}
 
 export const createProject = async (data: Project) => {
   return await prisma.project.create({

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from './authentication.service';
 import { StatusCode } from '../utils/constants';
 
 export class AuthenticationController {
@@ -70,3 +70,5 @@ export class AuthenticationController {
     }
   }
 }
+
+export const authenticationController = new AuthenticationController();

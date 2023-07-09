@@ -6,7 +6,7 @@ import { publishApi, projectApi, domainApi, authenticationApi } from '../api';
 export const connectRoutes = (endpointEntry: string) => {
   app.use('/auth', authenticationApi);
    
-  app.use(`${endpointEntry}/domain`, domainApi);
+  app.use(`${endpointEntry}/domains`, domainApi);
 
   app.use(`${endpointEntry}/project`, projectApi);
 

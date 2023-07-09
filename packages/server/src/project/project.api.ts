@@ -1,6 +1,6 @@
 import express from 'express';
-import { projectController } from '../controller';
-import { projectValidator } from '../validators';
+import { projectController } from './project.controller';
+import { projectValidator } from './project.validator';
 
 export const projectApi = express.Router();
 

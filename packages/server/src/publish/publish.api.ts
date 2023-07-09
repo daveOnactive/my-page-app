@@ -1,6 +1,5 @@
 import express from 'express';
-import { publishController } from '../controller';
-import { publishValidator } from '../validators';
+import { publishController } from './publish.controller';
 
 export const publishApi = express.Router();
 
