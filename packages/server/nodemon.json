@@ -1,6 +1,7 @@
 {
   "watch": [
-    "src"
+    "src",
+    "../prisma-client/dist/index.js"
   ],
   "ext": ".ts,.js",
   "ignore": [],

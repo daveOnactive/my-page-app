@@ -21,7 +21,7 @@ class Server {
 
   init() {
     this.bodyParser();
-    this.app.listen(this.PORT, () => {
+    this.app.listen(this.PORT, async () => {
       console.log(`Server running at http://localhost:${this.PORT}`);
     });
   }

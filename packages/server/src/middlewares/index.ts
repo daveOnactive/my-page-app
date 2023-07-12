@@ -1,2 +1,2 @@
 export { errorHandler } from './error-handler.middleware';
-export { authenticated } from './authenticated.middleware';
+export { isAuthenticated } from './authorization.middleware';
