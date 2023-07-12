@@ -1,8 +1,10 @@
 import { createProject, updateProject, getProjectById, getUserProject, deleteProject, Project } from '@my-page/prisma-client';
 import { ErrorMessage, StatusCode } from '../utils/constants';
-import { HttpError } from '../utils/helpers';
+import { HttpError, ExceptionHandler } from '../utils/helpers';
 
 export class ProjectService {
+
+  exceptionHandler = new ExceptionHandler();
   async createProject(requestBody: Project) {
     try {
       const project = await createProject({
@@ -14,7 +16,6 @@ export class ProjectService {
 
       return project;
     } catch (error) {
-      console.log(error);
       throw new HttpError(`${error}`, StatusCode.BAD_REQUEST);
     }
   }
@@ -33,7 +34,6 @@ export class ProjectService {
 
       return project;
     } catch (error) {
-      console.log(error);
       throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);
     }
   }
@@ -49,7 +49,6 @@ export class ProjectService {
         userId: userId,
       });
     } catch (error) {
-      console.log(error);
       throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);
     }
   }
@@ -59,17 +58,16 @@ export class ProjectService {
       const project = await deleteProject(projectId);
       return project;
     } catch (error) {
-      console.log(error);
       throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);
     }
   }
 
   async getProjects(userId: number) {
+
     try {
       const projects = await getUserProject(userId);
       return projects;
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
       throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);
     }
   }
@@ -79,7 +77,6 @@ export class ProjectService {
       const project = await getProjectById(projectId);
       return {...project, tree: JSON.parse(project?.tree || '')} as Project;
     } catch (error) {
-      console.log(error);
       throw new HttpError(ErrorMessage.BAD_REQUEST, StatusCode.BAD_REQUEST);
     }
   }
