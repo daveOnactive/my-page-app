@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { getUserById } from '@my-page/prisma-client';
 import { StatusCode } from '../utils/constants';
 import { HttpError } from '../utils/helpers';
 
@@ -12,7 +13,10 @@ class Authorization {
         throw new HttpError('Token not found', StatusCode.UNAUTHORIZED);
       }
       const decoded = jwt.verify(token, Authorization.jwtSecretKey) as { id: string };
-      req.body.userId = decoded.id;
+      if (await getUserById(Number(decoded.id)) === null) {
+        throw new HttpError('User not found', StatusCode.UNAUTHORIZED);
+      }
+      req.headers.userId = decoded.id;
       next();
     } catch (err: any) {
       res.status(StatusCode.UNAUTHORIZED).json({ message: err.message });

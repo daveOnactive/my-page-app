@@ -18,6 +18,8 @@ export { getAllProject, createProject, deleteProject, getProjectById, updateProj
 
 export { createUser, deleteUser, getAllUser, getUserById, updateUser, getUserByEmail } from './queries/user.query';
 
+export { pageQuery } from './queries/page.query';
+
 // Models
-export { User, Project } from './models';
+export { User, Project, Page, } from './models';
 

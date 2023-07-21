@@ -29,7 +29,7 @@ export class AuthenticationService {
   }
 
   private generateToken(id: string, email: string, expiresIn?: string) {
-    const token = this.JWT.sign({email, id}, this.jwtSecretKey, { expiresIn: expiresIn || '1h' });
+    const token = this.JWT.sign({email, id}, this.jwtSecretKey, { expiresIn: expiresIn || '7d' });
 
     return token;
   }

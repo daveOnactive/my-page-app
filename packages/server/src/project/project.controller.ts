@@ -1,26 +1,37 @@
 import { Request, Response, NextFunction} from 'express';
-import { ProjectService } from '../services';
+import { createProject, updateProject, getProjectById, getUserProject, deleteProject } from '@my-page/prisma-client';
 import { StatusCode } from '../utils/constants';
 
 class ProjectController {
-
-  static projectService: ProjectService;
-
-  constructor(projectService: ProjectService) {
-    ProjectController.projectService = projectService;
-  }
-
   async createProject(req: Request, res: Response, next: NextFunction) {
-
     try {
+      const userId = Number(req.headers.userId);
       const requestBody = {
         name: req.body.name,
         status: req.body.status,
         tree: JSON.stringify(req.body.tree),
-        userId: req.body.userId,
+        userId,
       };
 
-      const project = await ProjectController.projectService.createProject(requestBody);
+      const project = await createProject({
+        name: requestBody.name,
+        status: requestBody.status,
+        user: {
+          connect: {
+            id: requestBody.userId,
+          }
+        },
+        page: {
+          createMany: {
+            data: [
+              {
+                name: 'home',
+                tree: requestBody.tree,
+              }
+            ]
+          }
+        }
+      });
 
       res.status(StatusCode.CREATED).json({
         data: project
@@ -32,14 +43,8 @@ class ProjectController {
 
   async updateProject(req: Request, res: Response, next: NextFunction) {
     try {
-      const requestBody = {
-        name: req.body.name,
-        status: req.body.status,
-        tree: JSON.stringify(req.body.tree),
-        userId: req.body.userId,
-      };
-
-      const project = await ProjectController.projectService.updateProject(Number(req.params.projectId), requestBody);
+      const userId = Number(req.headers.userId);
+      const project = await updateProject(Number(req.params.projectId), {...req.body, userId});
 
       res.status(StatusCode.SUCCESS).json({
         data: project
@@ -51,7 +56,8 @@ class ProjectController {
 
   async deleteProject(req: Request, res: Response, next: NextFunction) {
     try {
-      const project = await ProjectController.projectService.deactivateProject(Number(req.params.projectId), Number(req.body.userId));
+      const project = await deleteProject(Number(req.params.projectId));
+
       res.status(StatusCode.SUCCESS).json({
         data: project
       });
@@ -62,7 +68,9 @@ class ProjectController {
 
   async getProjects(req: Request, res: Response, next: NextFunction) {
     try {
-      const projects = await ProjectController.projectService.getProjects(Number(req.body.userId));
+      const userId = Number(req.headers.userId);
+      const projects = await getUserProject(userId);
+
       res.status(StatusCode.SUCCESS).json({
         data: projects
       });
@@ -73,7 +81,8 @@ class ProjectController {
 
   async getProjectById(req: Request, res: Response, next: NextFunction) {
     try {
-      const project = await ProjectController.projectService.getProjectById(Number(req.params.projectId));
+      const project = await getProjectById(Number(req.params.projectId));
+
       res.status(StatusCode.SUCCESS).json({
         data: project
       });
@@ -83,4 +92,4 @@ class ProjectController {
   }
 }
 
-export const projectController = new ProjectController(new ProjectService);
+export const projectController = new ProjectController();
