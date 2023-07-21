@@ -1,11 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
-import { StatusCode } from '../utils/constants';
+import { ValidatorBuilder } from '../utils/helpers';
 
 const schema = Joi.object({
   name: Joi.string().required(),
   status: Joi.number().required(),
-  userId: Joi.number().required(),
   tree: Joi.object({
     id: Joi.string().required(),
     type: Joi.string().required(),
@@ -17,11 +15,11 @@ const schema = Joi.object({
   }).required(),
 }).id('schema');
 
-export const projectValidator = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    await schema.validateAsync(req.body);
-    next();
-  } catch (err) {
-    return res.status(StatusCode.BAD_REQUEST).json({ message: err });
-  }
-};
+const UpdateProjectSchema = Joi.object({
+  name: Joi.string(),
+  status: Joi.number(),
+});
+
+export const updateProjectValidator = new ValidatorBuilder(UpdateProjectSchema).validate;
+
+export const projectValidator = new ValidatorBuilder(schema).validate;

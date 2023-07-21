@@ -1,4 +1,5 @@
-import { prisma, Project } from '..';
+import { prisma } from '..';
+import { Prisma } from '@prisma/client';
 
 export const getAllProject = async () => await prisma.project.findMany();
 
@@ -7,6 +8,9 @@ export const getProjectById = async (id: number) => {
     where: {
       id,
     },
+    include: {
+      page: true
+    }
   });
 };
 
@@ -18,13 +22,16 @@ export const getUserProject = async (userId: number) => {
   });
 };
 
-export const createProject = async (data: Project) => {
+export const createProject = async (data: Prisma.ProjectCreateInput) => {
   return await prisma.project.create({
     data,
+    include: {
+      page: true
+    }
   });
 };
 
-export const updateProject = async (id: number, data: Project) => {
+export const updateProject = async (id: number, data: Partial<Prisma.ProjectCreateInput>) => {
   return await prisma.project.update({
     where: {
       id,
@@ -34,9 +41,19 @@ export const updateProject = async (id: number, data: Project) => {
 };
 
 export const deleteProject = async (id: number) => {
-  return await prisma.project.delete({
+  const project = prisma.project.delete({
     where: {
       id
     }
   });
+
+  const page = prisma.page.deleteMany({
+    where: {
+      projectId: id
+    }
+  });
+
+  const transaction = await prisma.$transaction([page, project]);
+
+  return transaction;
 };

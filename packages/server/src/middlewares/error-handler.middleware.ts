@@ -4,15 +4,19 @@ import { HttpError } from '../utils/helpers';
 
 export const errorHandler = (err: HttpError, req: Request, res: Response, next: NextFunction) => {
 
-  // console.log(err);
+  console.log(err);
+  let status = StatusCode.INTERNAL_SERVER_ERROR;
+  let message = ErrorMessage.INTERNAL_SERVER_ERROR as string;
   
   if (err.message.toLowerCase() === ErrorMessage.UNAUTHORIZED.toLowerCase() && err.status === StatusCode.UNAUTHORIZED) {
-    return res.status(err.status).json({ message: err.message });
+    status = StatusCode.UNAUTHORIZED;
+    message = err.message;
   }
 
   if (err instanceof HttpError) {
-    return res.status(err.status).json({ message: err.message });
+    status = err.status;
+    message = err.message;
   }
   
-  return res.status(StatusCode.INTERNAL_SERVER_ERROR).json({ message: ErrorMessage.INTERNAL_SERVER_ERROR });
+  res.status(status).json({ message: message || ErrorMessage.INTERNAL_SERVER_ERROR });
 };

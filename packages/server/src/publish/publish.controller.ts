@@ -1,63 +1,47 @@
 import { Request, Response, NextFunction } from 'express';
-import { VercelService, ProjectService } from '../services';
+import { VercelService } from '../services';
 import { StatusCode } from '../utils/constants';
-import { ElementTree, addHtmlRoot, convertToHTML } from '@my-page/libs';
+import { getProjectById, updateProject, Page } from '@my-page/prisma-client';
+import { PublishService } from './publish.service';
+import { HttpError} from '../utils/helpers';
 
 class PublishController {
-  static projectService: ProjectService;
   static vercelService: VercelService;
+  private static publishService: PublishService;
 
-  constructor(projectService: ProjectService, vercelService: VercelService) {
-    PublishController.projectService = projectService;
+  constructor(vercelService: VercelService, publishService: PublishService) {
     PublishController.vercelService = vercelService;
+    PublishController.publishService = publishService;
   }
 
   async createDeploy(req: Request, res: Response, next: NextFunction) {
-
     try {
       const projectId = Number(req.params.projectId);
 
+      const project = await getProjectById(projectId);
 
-      const project = await PublishController.projectService.getProjectById(projectId);
-
-      if (project) {
-
-        const build = addHtmlRoot({
-          body: convertToHTML(project.tree as unknown as ElementTree),
-          title: project.name,
-        });
-
-        const { data } = await PublishController.vercelService.createDeployment({
-          deploymentId: String(project?.deploymentId || '') || undefined,
-          name: project.name.replace(/ /g, '-').toLowerCase(),
-          files: [
-            {
-              data: build,
-              file: 'index.html'
-            }
-          ]
-        });
-
-    
-        await PublishController.projectService.updateProject(projectId, {
-          name: project.name,
-          status: project.status,
-          tree:  JSON.stringify(project.tree),
-          userId: project.userId,
-          deploymentId: data.id,
-          deploymentUrl: data.url,
-          vercelId: data.projectId,
-        });
-
-        res.status(StatusCode.SUCCESS).json({
-          message: 'Deployment is created and in progress...',
-          deploymentUrl: data.url,
-        });
+      if (!project) {
+        throw new HttpError('Project not found.', StatusCode.BAD_REQUEST);
       }
-      
 
-      res.status(StatusCode.BAD_REQUEST).json({
-        message: 'Project not found.',
+      const files = project ? await PublishController.publishService.buildProject(project.page as Page[]) : [];
+
+
+      const { data } = await PublishController.vercelService.createDeployment({
+        deploymentId: String(project?.deploymentId || '') || undefined,
+        name: project.name.replace(/ /g, '-').toLowerCase(),
+        files
+      });
+
+      await updateProject(projectId, {
+        deploymentId: data.id,
+        deploymentUrl: data.url,
+        vercelId: data.projectId,
+      });
+
+      res.status(StatusCode.SUCCESS).json({
+        message: 'Deployment is created and in progress...',
+        deploymentUrl: data.url,
       });
     
     } catch (error) {
@@ -69,24 +53,18 @@ class PublishController {
     try {
       const projectId = Number(req.params.projectId);
 
-      const project = await PublishController.projectService.getProjectById(projectId);
+      const project = await getProjectById(projectId);
 
       if (!project?.deploymentId) {
-        return res.status(StatusCode.BAD_REQUEST).json({
-          message: 'Deployment not found.',
-        });
+        throw new HttpError('Deployment not found.', StatusCode.BAD_REQUEST);
       }
 
       await PublishController.vercelService.deleteDeployment(String(project?.deploymentId || ''));
 
-      await PublishController.projectService.updateProject(projectId, {
-        name: project.name,
-        status: project.status,
-        tree: JSON.stringify(project.tree),
-        userId: project.userId,
+      await updateProject(projectId, {
         deploymentId: '',
         deploymentUrl: '',
-        vercelId: project.vercelId
+        vercelId: '',
       });
 
       res.status(StatusCode.SUCCESS).json({
@@ -99,4 +77,4 @@ class PublishController {
   }
 }
 
-export const publishController = new PublishController(new ProjectService, new VercelService);
+export const publishController = new PublishController(new VercelService, new PublishService);
