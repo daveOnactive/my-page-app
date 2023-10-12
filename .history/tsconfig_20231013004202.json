@@ -3,6 +3,7 @@
     "lib": [
       "es6"
     ],
+    "outDir": "./dist",
     "allowJs": true,
     "strict": true,
     "noImplicitAny": true,
@@ -13,4 +14,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
+  // "include": [
+  //   "packages/**/*"
+  // ],
 }

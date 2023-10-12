@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es6"
-    ],
+    "lib": ["es6"],                   
     "allowJs": true,
     "strict": true,
     "noImplicitAny": true,
@@ -12,5 +10,5 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  },
+  }
 }

@@ -13,4 +13,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
+  "include": [
+    "packages/**/*"
+  ],
+  // "references": [
+  //   "packa"
+  // ]
 }
