@@ -11,5 +11,11 @@
     "source.fixAll.eslint": true
   },
   "eslint.alwaysShowStatus": true,
-  "typescript.format.enable": false
+  "typescript.format.enable": false,
+  "tsimporter.filesToScan": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.vue"
+  ],
+  "tsimporter.filesToExclude": []
 }
