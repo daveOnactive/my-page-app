@@ -10,7 +10,10 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    
+    active: {
+      options: [true, false],
+      controls: { type: 'radio' }
+    }
   },
 } satisfies Meta<typeof Link>;
 

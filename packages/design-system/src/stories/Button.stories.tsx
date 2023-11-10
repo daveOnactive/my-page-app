@@ -11,35 +11,24 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    
+    variant: {
+      options: ['contained', 'outlined', 'text'],
+      control: { type: 'radio' }
+    },
+    color: {
+      options: ['secondary', 'primary'],
+      control: { type: 'radio' }
+    }
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Contained: Story = {
+export const DefaultButton: Story = {
   args: {
     children: 'Button',
     variant: 'contained',
-    size: 'medium',
-    color: 'secondary'
-  },
-};
-
-export const Outlined: Story = {
-  args: {
-    children: 'Button',
-    variant: 'outlined',
-    size: 'medium',
-    color: 'primary'
-  },
-};
-
-export const Text: Story = {
-  args: {
-    children: 'Button',
-    variant:'text',
     size: 'medium',
     color: 'secondary'
   },

@@ -16,10 +16,14 @@ import { Avatar, AppLogo, Link } from '.';
 type IProps = {
   pages: string[];
   settings: string[];
-  isLoggedIn: boolean;
+  isLoggedIn?: boolean;
+  profile?: {
+    avatarUrl?: string;
+    name?: string;
+  }
 }
 
-export function NavigationBar({ pages, settings, isLoggedIn }: IProps) {
+export function NavigationBar({ pages, settings, isLoggedIn, profile }: IProps) {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -42,11 +46,11 @@ export function NavigationBar({ pages, settings, isLoggedIn }: IProps) {
     <AppBar position="fixed" sx={{
       boxShadow: 'none',
       background: 'none',
-      borderBottom: `.1px solid ${grey['A700']}`
+      borderBottom: `.1px solid ${grey['A400']}`
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}><AppLogo /></Box>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, cursor: 'pointer' }}><AppLogo /></Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -106,8 +110,8 @@ export function NavigationBar({ pages, settings, isLoggedIn }: IProps) {
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
-                    src='src/assets/avatar.png'
-                    alt='David Creator'
+                    src={profile?.avatarUrl}
+                    alt={profile?.name}
                   />
                 </IconButton>
               </Tooltip>

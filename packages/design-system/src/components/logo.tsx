@@ -1,10 +1,11 @@
 import Box from '@mui/material/Box';
+import logo from './assets/logo.png';
 
 export const AppLogo = () => {
   return (
     <Box
       component='img'
-      src='src/assets/logo.png'
+      src={logo}
       sx={{
         width: {
           xs: '30px',

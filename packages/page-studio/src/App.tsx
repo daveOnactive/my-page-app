@@ -1,10 +1,19 @@
+import { Button, NavigationBar } from '@my-page/design-system';
+
 function App() {
 
   return (
     <>
-      page studio
+      <NavigationBar
+        pages={['Template', 'Dashboard', 'About']}
+        settings={['Dashboard', 'Settings']}
+        profile={{
+          avatarUrl: '',
+          name: ''
+        }}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
