@@ -10,33 +10,20 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    
+    size: {
+      options: ['large', 'medium', 'small',],
+      control: { type: 'radio'}
+    }
   },
 } satisfies Meta<typeof Avatar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SmallAvatar: Story = {
-  args: {
-    src: 'src/assets/avatar.png',
-    alt: 'David',
-    size: 'small'
-  }
-};
-
-export const MediumAvatar: Story = {
+export const DefaultAvatar: Story = {
   args: {
     src: 'src/assets/avatar.png',
     alt: 'David',
     size: 'medium'
-  }
-};
-
-export const LargeAvatar: Story = {
-  args: {
-    src: 'src/assets/avatar.png',
-    alt: 'David',
-    size: 'large'
   }
 };

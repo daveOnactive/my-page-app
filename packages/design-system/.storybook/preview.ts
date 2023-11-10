@@ -12,6 +12,19 @@ import { theme } from "../src/themes";
 
 const preview: Preview = {
   parameters: {
+    backgrounds: {
+      default: 'light',
+      values: [
+        {
+          name: 'light',
+          value: '#fff',
+        },
+        {
+          name: 'dark',
+          value: '#11111',
+        },
+      ],
+    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {

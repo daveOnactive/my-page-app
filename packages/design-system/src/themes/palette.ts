@@ -1,4 +1,4 @@
-import { blueGrey, grey } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
 export const colorPalette = {
   primary: {
@@ -8,7 +8,7 @@ export const colorPalette = {
     main: grey['900'],
   },
   background: {
-    default: blueGrey['800'],
-    paper: blueGrey['700'],
+    default: grey['50'],
+    paper: grey['50'],
   },
 }
