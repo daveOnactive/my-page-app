@@ -14,7 +14,10 @@ import { grey } from '@mui/material/colors';
 import { Avatar, AppLogo, Link } from '.';
 
 type IProps = {
-  pages: string[];
+  pages: {
+    name: string;
+    link: string;
+  }[];
   settings: string[];
   isLoggedIn?: boolean;
   profile?: {
@@ -82,8 +85,13 @@ export function NavigationBar({ pages, settings, isLoggedIn, profile }: IProps) 
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Link
+                  href={page.link}
+                  key={page.name}
+                >
+                  <Typography textAlign="center">{page.name}</Typography>
+                </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -94,12 +102,12 @@ export function NavigationBar({ pages, settings, isLoggedIn, profile }: IProps) 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             {pages.map((page) => (
               <Link
-                href='#'
-                key={page}
+                href={page.link}
+                key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, mx: 1, display: 'block' }}
               >
-                {page}
+                {page.name}
               </Link>
             ))}
           </Box>

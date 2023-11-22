@@ -9,7 +9,8 @@ export const theme = createTheme({
   typography: {
     button: {
       fontSize: '.8rem'
-    }
+    },
+    fontFamily: "'Roboto', arial"
   },
   components: {
     MuiButton: {

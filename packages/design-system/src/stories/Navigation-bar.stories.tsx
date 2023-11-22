@@ -19,7 +19,16 @@ type Story = StoryObj<typeof meta>;
 
 export const LoggedInNavbar: Story = {
   args: {
-    pages: ['Templates', 'Resources'],
+    pages: [
+    {
+      name: 'Templates',
+      link: '#'
+    },
+    {
+      name: 'Resources',
+      link: '#'
+    }
+  ],
     settings: [],
     isLoggedIn: true
   }
