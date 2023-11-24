@@ -1,0 +1,1 @@
+export { AppModalProvider } from './app-modal.provider';

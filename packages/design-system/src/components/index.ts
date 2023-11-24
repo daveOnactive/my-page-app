@@ -1,5 +1,6 @@
 import MuiBox from '@mui/material/Box';
 import MuiContainer from '@mui/material/Container';
+import MuiIcon from '@mui/material/Icon';
 
 export { Button } from './button';
 export { NavigationBar } from './navigation-bar';
@@ -23,3 +24,4 @@ export { ProjectItem } from './project-item';
 export { DesignSystemProvider } from './design-system-provider';
 export const Box = MuiBox;
 export const Container = MuiContainer;
+export const Icon = MuiIcon;
