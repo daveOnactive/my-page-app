@@ -1,4 +1,4 @@
-import { Text, Button, Box, Card, Icon } from '@my-page/design-system';
+import { Text, Button, Box, Card, Icon, Link } from '@my-page/design-system';
 
 export const CreateProjectModal = () => (
   <Box>
@@ -55,7 +55,13 @@ export const CreateProjectModal = () => (
       </Box>
       
       <Box display='flex' justifyContent='center'>
-        <Button sx={{ my: 4 }} color='secondary' variant='contained' endIcon={(
+        <Button
+          component={Link}
+          sx={{ my: 4 }} 
+          color='secondary'
+          href='/templates'
+          variant='contained' 
+          endIcon={(
           <Icon fontSize='medium'>
             trending_flat
           </Icon>
