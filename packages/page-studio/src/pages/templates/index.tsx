@@ -1,7 +1,8 @@
-import { Box, Text, ResultText, Button, Icon } from "@my-page/design-system";
+import { Box, Text, ResultText, Button, Icon, Link } from "@my-page/design-system";
 import { ExploreTemplates, TemplatesList } from "./features";
+import { WithModal } from "../../hoc/with-modal.hoc";
 
-export const Templates = () => {
+export const Templates = WithModal(() => {
   return (
     <Box>
       <Text variant="h5" mt={2}>
@@ -23,6 +24,8 @@ export const Templates = () => {
         <Button 
           color='secondary' 
           variant="contained"
+          component={Link}
+          href='/build-custom-template'
           endIcon={(
             <Icon
               fontSize="medium"
@@ -39,4 +42,4 @@ export const Templates = () => {
 
     </Box>
   )
-};
+});
