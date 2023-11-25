@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Dashboard, Studio, Templates } from "./pages";
+import { Dashboard, Studio, Templates, BuildCustomTemplate } from "./pages";
 
 export const router = createBrowserRouter([
   {
@@ -14,4 +14,8 @@ export const router = createBrowserRouter([
     path: "/studio",
     element: <Studio />
   },
+  {
+    path: '/build-custom-template',
+    element: <BuildCustomTemplate />
+  }
 ]);

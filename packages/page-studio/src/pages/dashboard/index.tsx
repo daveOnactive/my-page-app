@@ -1,5 +1,6 @@
 import { Box, ProjectItem } from '@my-page/design-system';
 import { Header } from './features';
+import { WithModal } from '../../hoc/with-modal.hoc';
 
 
 const projectItem = [
@@ -17,7 +18,7 @@ const projectItem = [
   }
 ]
 
-export const Dashboard = () => {
+export const Dashboard = WithModal(() => {
   return (
     <Box width='100%'>
       <Header
@@ -39,4 +40,4 @@ export const Dashboard = () => {
       </Box>
     </Box>
   )
-}
+})

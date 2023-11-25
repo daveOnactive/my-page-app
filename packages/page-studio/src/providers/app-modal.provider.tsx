@@ -6,6 +6,7 @@ type ModalState = {
   title?: string;
   content?: React.ReactNode;
   withLogo?: boolean;
+  goBack?: () => void;
   actionButton?: {
     close?: {
       text: string;
@@ -20,7 +21,7 @@ type ModalState = {
 
 export const AppModalContext = createContext({
   handleClose: () => null,
-  handleOpen: (props: ModalState) => props
+  handleOpen: (props: ModalState) => props,
 });
 
 export const AppModalProvider = (props: PropsWithChildren) => {
@@ -47,7 +48,7 @@ export const AppModalProvider = (props: PropsWithChildren) => {
         content={modalState?.content}
         fullScreen={modalState?.fullScreen}
         open={open}
-        handleClose={handleClose}
+        handleClose={modalState?.goBack || handleClose}
         actionButton={modalState?.actionButton}
         withLogo={modalState?.withLogo}
       />

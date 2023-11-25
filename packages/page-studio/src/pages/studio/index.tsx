@@ -1,5 +1,5 @@
 export const Studio = () => {
   return (
-    <>This is dashboard</>
+    <>This is Studio</>
   )
 }
