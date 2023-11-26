@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { EditorSidebar } from '../components';
+import { EditorSidebar, EditorHeader } from '../components';
 
 const meta = {
   title: 'Components/EditorSidebar',
@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-
+    children: <EditorHeader />
   },
 };
 
