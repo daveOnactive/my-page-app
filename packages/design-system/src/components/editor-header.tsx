@@ -31,7 +31,6 @@ export const EditorHeader = (props: IProps) => {
       display: 'flex',
       justifyContent: 'space-between',
       padding: 2,
-      width: '700px'
     }}>
       <IconButton title="fullscreen">
         {

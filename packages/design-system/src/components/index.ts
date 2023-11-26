@@ -1,6 +1,7 @@
 import MuiBox from '@mui/material/Box';
 import MuiContainer from '@mui/material/Container';
 import MuiIcon from '@mui/material/Icon';
+import MuiPaper from '@mui/material/Paper';
 
 export { Button } from './button';
 export { NavigationBar } from './navigation-bar';
@@ -22,6 +23,8 @@ export { EditorHeader } from './editor-header';
 export { EditorSidebar } from './editor-sidebar';
 export { ProjectItem } from './project-item';
 export { DesignSystemProvider } from './design-system-provider';
+export * from '@mui/material/colors';
 export const Box = MuiBox;
 export const Container = MuiContainer;
 export const Icon = MuiIcon;
+export const Paper = MuiPaper;

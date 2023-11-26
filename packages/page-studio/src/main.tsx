@@ -7,13 +7,16 @@ import {
 import './index.css';
 import { router } from './router.tsx';
 import { PageContainer } from './layouts';
+import { AppNavigationProvider } from './providers/app-navigation.provider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <DesignSystemProvider>
-      <PageContainer>
-        <RouterProvider router={router} />
-      </PageContainer>
+      <AppNavigationProvider>
+        <PageContainer>
+          <RouterProvider router={router} />
+        </PageContainer>
+      </AppNavigationProvider>
     </DesignSystemProvider>
   </React.StrictMode>,
 )
