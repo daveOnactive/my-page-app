@@ -1,7 +1,7 @@
 import { VerticalLinearStepper, Box, Button, Icon } from "@my-page/design-system";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TemplateTitle, TemplateSections } from ".";
+import { TemplateTitle, TemplateSections, TemplatePages } from ".";
 
 export const CreateCustomTemplateStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -35,7 +35,7 @@ export const CreateCustomTemplateStepper = () => {
             label: 'Website Sections'
           },
           {
-            description: <></>,
+            description: <TemplatePages />,
             label: 'Pages'
           },
           {
@@ -75,7 +75,7 @@ export const CreateCustomTemplateStepper = () => {
           sx={{
             mx: 2
           }}
-          disabled={activeStep === 3}
+          disabled={activeStep === 4}
           onClick={handleNextStep}
           endIcon={
             (
@@ -88,7 +88,7 @@ export const CreateCustomTemplateStepper = () => {
           Next
         </Button>
         <Button
-          disabled={activeStep < 3}
+          disabled={activeStep < 4}
           variant="contained"
           color="secondary"
           onClick={() => navigate('/studio')}

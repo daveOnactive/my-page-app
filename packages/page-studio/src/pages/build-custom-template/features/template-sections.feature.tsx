@@ -4,7 +4,7 @@ export const TemplateSections = () => {
   return (
     <Box my={4} mx={2}>
       <Accordion
-      data={[
+        data={[
           {
             details: '',
             summary: 'Banner',
