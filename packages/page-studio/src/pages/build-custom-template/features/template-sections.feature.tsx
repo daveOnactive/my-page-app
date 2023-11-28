@@ -1,4 +1,4 @@
-import { Accordion, Box } from "@my-page/design-system";
+import { Accordion, Box, Input } from "@my-page/design-system";
 
 export const TemplateSections = () => {
   return (
@@ -34,6 +34,16 @@ export const TemplateSections = () => {
             summary: 'Footer',
           }
         ]}
+      />
+      <Input
+        variant='outlined'
+        color='secondary'
+        placeholder='Enter Page Section'
+        fullWidth
+        size='small'
+        sx={{
+          mt: 3
+        }}
       />
     </Box>
   );

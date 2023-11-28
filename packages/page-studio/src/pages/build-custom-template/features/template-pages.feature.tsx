@@ -1,4 +1,4 @@
-import { List, Box, Text, IconButton, Icon } from '@my-page/design-system';
+import { List, Box, Text, IconButton, Icon, Input } from '@my-page/design-system';
 
 const ListItem = ({ title }: { title: string }) => {
   return (
@@ -32,6 +32,13 @@ export const TemplatePages = () => {
             <ListItem title='Pricing' />,
           ]
         }
+      />
+      <Input
+        variant='outlined'
+        color='secondary'
+        placeholder='Enter Page Name'
+        fullWidth
+        size='small'
       />
     </Box>
   );

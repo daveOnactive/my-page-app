@@ -1,7 +1,7 @@
 import { VerticalLinearStepper, Box, Button, Icon } from "@my-page/design-system";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TemplateTitle, TemplateSections, TemplatePages } from ".";
+import { TemplateTitle, TemplateSections, TemplatePages, TemplateColor, TemplateFonts } from ".";
 
 export const CreateCustomTemplateStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -39,11 +39,11 @@ export const CreateCustomTemplateStepper = () => {
             label: 'Pages'
           },
           {
-            description: <></>,
+            description: <TemplateColor />,
             label: 'Color Preference'
           },
           {
-            description: <></>,
+            description: <TemplateFonts />,
             label: 'Fonts'
           },
         ]}
