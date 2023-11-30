@@ -66,7 +66,11 @@ export function Accordion(props: IProps) {
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
               {item.summary}
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails
+              sx={{
+                overflowX: 'scroll'
+              }}
+            >
               {item.details}
             </AccordionDetails>
           </CustomizedAccordion>

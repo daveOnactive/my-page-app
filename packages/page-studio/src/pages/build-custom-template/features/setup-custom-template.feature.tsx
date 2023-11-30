@@ -10,7 +10,8 @@ export const SetupCustomTemplate = () => {
       <Box sx={{
         display: 'grid',
         gridTemplateColumns: '2fr 3fr',
-        height: '100%'
+        height: '100%',
+        overflowX: 'hidden'
       }}>
         <PreviewTemplate />
         <Box>

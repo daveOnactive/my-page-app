@@ -1,4 +1,34 @@
-import { Accordion, Box, Input } from "@my-page/design-system";
+import { Accordion, Box, Input, Paper } from "@my-page/design-system";
+
+
+const Sections = () => {
+  return (
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gap: 2
+      }}
+    >
+    {
+      [1, 2, 3, 4, 5].map(item => (
+        <Paper
+          key={item}
+          sx={{
+            width: 150,
+            height: 150,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'pointer'
+          }}
+          variant='outlined'
+        ></Paper>
+      ))
+    }
+    </Box>
+  )
+}
 
 export const TemplateSections = () => {
   return (
@@ -6,31 +36,23 @@ export const TemplateSections = () => {
       <Accordion
         data={[
           {
-            details: '',
+            details: <Sections />,
             summary: 'Banner',
           },
           {
-            details: '',
-            summary: 'What we do',
-          },
-          {
-            details: '',
+            details: <Sections />,
             summary: 'Services',
           },
           {
-            details: '',
-            summary: 'Pricing',
-          },
-          {
-            details: '',
+            details: <Sections />,
             summary: 'Contact Us',
           },
           {
-            details: '',
+            details: <Sections />,
             summary: 'Newsletter',
           },
           {
-            details: '',
+            details: <Sections />,
             summary: 'Footer',
           }
         ]}

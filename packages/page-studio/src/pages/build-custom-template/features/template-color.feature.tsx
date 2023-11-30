@@ -15,6 +15,7 @@ export const TemplateColor = () => {
           [1,2,3].map((index) => (
             <Box key={index} py={2}>
               <ColorPalette
+                isActive={index === 2}
                 palette={{
                   a: 'red',
                   b: 'blue',

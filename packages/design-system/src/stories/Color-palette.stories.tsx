@@ -28,4 +28,16 @@ export const Default: Story = {
   },
 };
 
+export const ActiveColorPalette: Story = {
+  args: {
+    palette: {
+      a: '#f50057',
+      b: '#9e9d24',
+      c: '#f44336',
+      d: '#9c27b0',
+    },
+    isActive: true
+  },
+};
+
 
