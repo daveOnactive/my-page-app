@@ -1,4 +1,5 @@
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
+import { blue } from "@mui/material/colors";
 
 
 type IProps = {
@@ -8,14 +9,26 @@ type IProps = {
     b: string;
     c: string;
     d: string;
-  }
+  };
+  isActive?: boolean;
 }
 
 export const ColorPalette = (props: IProps) => {
-  const palette = props.palette;
+  const { isActive, palette, handleClick } = props;
+
+  const activeStyle = isActive ? { border: `1.5px solid ${blue[500]}` } : { };
 
   return (
-    <Box display='flex' onClick={() => props?.handleClick && props.handleClick(palette)}>
+    <Box 
+      display='flex' 
+      onClick={() => handleClick && handleClick(palette)}
+      sx={{
+        cursor: 'pointer',
+        p: .2,
+        width: 'fit-content',
+        ...activeStyle
+      }}
+    >
       <Box width={50} height={50} sx={{background: palette.a}} />
       <Box width={50} height={50} sx={{background: palette.b}} />
       <Box width={50} height={50} sx={{background: palette.c}} />

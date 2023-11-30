@@ -9,7 +9,8 @@ export const PreviewTemplate = () => {
         justifyContent: 'center',
         alignItems: 'center',
         overflowY: 'scroll',
-        position: 'relative'
+        position: 'relative',
+        mb: 4
       }}
     >
       <Card

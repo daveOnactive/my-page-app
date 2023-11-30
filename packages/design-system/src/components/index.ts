@@ -2,6 +2,7 @@ import MuiBox from '@mui/material/Box';
 import MuiContainer from '@mui/material/Container';
 import MuiIcon from '@mui/material/Icon';
 import MuiPaper from '@mui/material/Paper';
+import MuiIconButton from '@mui/material/IconButton';
 
 export { Button } from './button';
 export { NavigationBar } from './navigation-bar';
@@ -28,3 +29,6 @@ export const Box = MuiBox;
 export const Container = MuiContainer;
 export const Icon = MuiIcon;
 export const Paper = MuiPaper;
+export * from './list';
+export const IconButton = MuiIconButton;
+export * from './font-card';
