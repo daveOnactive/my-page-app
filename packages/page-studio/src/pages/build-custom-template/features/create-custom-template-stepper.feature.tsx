@@ -27,8 +27,12 @@ export const CreateCustomTemplateStepper = () => {
         activeStep={activeStep}
         steps={[
           {
-            description: <TemplateTitle />,
-            label: 'Website Title'
+            description: (
+              <TemplateTitle
+                handleNext={handleNextStep}
+              />
+            ),
+            label: `Website Title`
           },
           {
             description: <TemplateSections />,
