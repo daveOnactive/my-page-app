@@ -4,6 +4,9 @@ import { DesignSystemProvider } from '@my-page/design-system';
 import {
   RouterProvider,
 } from "react-router-dom";
+import {
+  RecoilRoot,
+} from 'recoil';
 import './index.css';
 import { router } from './router.tsx';
 import { PageContainer } from './layouts';
@@ -14,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <DesignSystemProvider>
       <AppNavigationProvider>
         <PageContainer>
-          <RouterProvider router={router} />
+          <RecoilRoot>
+            <RouterProvider router={router} />
+          </RecoilRoot>
         </PageContainer>
       </AppNavigationProvider>
     </DesignSystemProvider>
