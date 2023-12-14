@@ -32,3 +32,4 @@ export const Paper = MuiPaper;
 export * from './list';
 export const IconButton = MuiIconButton;
 export * from './font-card';
+export * from './autocomplete';
