@@ -1,7 +1,5 @@
 import { ColorPalette, Box, Text } from '@my-page/design-system';
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { templateColors } from '../../../store';
+import { useCustomTemplateState } from '../hooks';
 
 const colors = {
   light: [
@@ -66,77 +64,81 @@ const colors = {
   ]
 };
 
-export const TemplateColor = () => {
-  const [isActive, setIsActive] = useState<string>('');
+type ColorSectionType = {
+  name: 'light' | 'dark' | 'natural';
+  handleColorPaletteClick: (colors: any, category: string, index: number) => void
+  isActive?: string
+}
 
-  const [_, setColorsStore] = useRecoilState(templateColors);
+enum ColorName {
+  light = 'Light Colors',
+  dark = 'Dark Colors',
+  natural = 'Natural Colors'
+}
+
+const ColorSection = ({ name, handleColorPaletteClick, isActive }: ColorSectionType) => {
+
+  return (
+    <>
+      <Text variant='subtitle1' fontWeight={500}>{ColorName[name]}</Text>
+      <Box sx={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        my: 2
+      }}>
+        {
+          colors[name].map((item, index) => (
+            <Box key={index} py={2}>
+              <ColorPalette
+                isActive={isActive === `${name}-${index}`}
+                palette={item}
+                handleClick={(colors) => {
+                  handleColorPaletteClick(colors, name, index);
+                }}
+              />
+            </Box>
+          ))
+        }
+      </Box>
+    </>
+  )
+}
+
+export const TemplateColor = () => {
+  const { colors } = useCustomTemplateState();
+
+  const [color, setColor] = colors;
 
   const handleColorPaletteClick = (colors: any, category: string, index: number) => {
-    setIsActive(`${category}-${index}`);
-    setColorsStore(colors);
+    setColor({
+      name: category,
+      value: colors,
+      active: `${category}-${index}`
+    });
   };
+  
 
   return (
     <Box sx={{
       m: 4
     }}>
-      <Text variant='subtitle1' fontWeight={500}>Light Colors</Text>
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        my: 2
-      }}>
-        {
-          colors.light.map((item, index) => (
-            <Box key={index} py={2}>
-              <ColorPalette
-                isActive={isActive === `light-${index}`}
-                palette={item}
-                handleClick={(colors) => handleColorPaletteClick(colors, 'light', index)}
-              />
-            </Box>
-          ))
-        }
-      </Box>
-      <Text variant='subtitle1' fontWeight={500}>Dark Colors</Text>
+      <ColorSection
+        name='light'
+        isActive={color.active}
+        handleColorPaletteClick={handleColorPaletteClick}
+      />
 
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        my: 2
-      }}>
-        {
-          colors.dark.map((item, index) => (
-            <Box key={index} py={2}>
-              <ColorPalette
-                palette={item}
-                isActive={isActive === `dark-${index}`}
-                handleClick={(colors) => handleColorPaletteClick(colors, 'dark', index)}
-              />
-            </Box>
-          ))
-        }
-      </Box>
+      <ColorSection
+        name='dark'
+        isActive={color.active}
+        handleColorPaletteClick={handleColorPaletteClick}
+      />
 
-      <Text variant='subtitle1' fontWeight={500}>Natural Colors</Text>
-
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        my: 2
-      }}>
-        {
-          colors.natural.map((item, index) => (
-            <Box key={index} py={2}>
-              <ColorPalette
-                palette={item}
-                isActive={isActive === `natural-${index}`}
-                handleClick={(colors) => handleColorPaletteClick(colors, 'natural', index)}
-              />
-            </Box>
-          ))
-        }
-      </Box>
+      <ColorSection
+        name='natural'
+        isActive={color.active}
+        handleColorPaletteClick={handleColorPaletteClick}
+      />
     </Box>
   )
 }

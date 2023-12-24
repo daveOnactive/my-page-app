@@ -1,7 +1,6 @@
 import { Accordion, Box, Paper, IconButton, Icon, Text, Autocomplete } from "@my-page/design-system";
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { templateSection } from "../../../store";
+import { useState, useMemo } from "react";
+import { useCustomTemplateState } from '../hooks';
 
 
 type SectionsProps = {
@@ -9,16 +8,25 @@ type SectionsProps = {
 }
 
 const Sections = (props: SectionsProps) => {
-  const [selected, setSelected] = useState(0);
-  const [section, setSection] = useRecoilState(templateSection);
 
-  const handleSectionClick = (item: number) => {
-    setSelected(item);
-    setSection({
-      ...section,
-      [props.name]: item
+  const { sections } = useCustomTemplateState();
+
+  const [section, setSection ] = sections;
+
+  const handleSectionClick = (value: number) => {
+    const clonedSection = [...section].map(item => {
+      if(item.name === props.name) {
+        return {
+          name: item.name,
+          value
+        }
+      }
+      return item;
     });
+    setSection(clonedSection);
   }
+
+  const pageSection = useMemo(() => section.find((item) => item.name === props.name), [section]);
 
   return (
     <Box
@@ -40,7 +48,7 @@ const Sections = (props: SectionsProps) => {
             justifyContent: 'center',
             alignItems: 'center',
             cursor: 'pointer',
-            border: selected === item ? '1px solid black' : ''
+            border: pageSection?.value === item ? '1px solid black' : ''
           }}
           variant='outlined'
         ></Paper>
@@ -67,22 +75,21 @@ const pageSectionOptions = [
 
 export const TemplateSections = () => {
 
-  const [sections, setSections] = useState([
-    'Banner'
-  ]);
+  const { sections } = useCustomTemplateState();
 
-  const [section, setSection] = useRecoilState(templateSection);
+  const [section, setSection ] = sections;
 
   const [options, setOptions] = useState(pageSectionOptions);
 
   const onRemoveSection = (name: string) => {
-    setSections((prev) => prev.filter(item => item !== name));
     setOptions((prev) => [...prev, { name }]);
-    const clonedSection = {
-      ...section
-    } as any;
+    const clonedSection = [...section].filter((item) => item.name !== name);
+    setSection(clonedSection);
+  }
 
-    delete clonedSection[name.toLowerCase()];
+  const onAddSection = (name: string) => {
+    setOptions((prev) => prev.filter(item => item.name !== name));
+    const clonedSection = [...section, { name }];
     setSection(clonedSection);
   }
 
@@ -90,13 +97,13 @@ export const TemplateSections = () => {
     <Box my={4} mx={2}>
       <Accordion
         data={[
-          ...sections?.map(item => {
+          ...section?.map(item => {
             return {
-              details: <Sections name={item.toLowerCase()} />,
+              details: <Sections name={item.name} />,
               summary: (
                 <Box display='flex' justifyContent='space-between' width='100%' alignItems='center'>
-                  <Text>{item}</Text>
-                  <IconButton onClick={() => onRemoveSection(item)}>
+                  <Text>{item.name}</Text>
+                  <IconButton onClick={() => onRemoveSection(item.name)}>
                     <Icon>delete</Icon>
                   </IconButton>
                 </Box>
@@ -114,8 +121,7 @@ export const TemplateSections = () => {
         }}
         onChange={(_, newValue) => {
           if(newValue) {
-            setSections((prev) => [...prev, newValue?.name]);
-            setOptions((prev) => prev.filter(item => item.name !== newValue?.name));
+            onAddSection(newValue?.name);
           }
         }}
       />

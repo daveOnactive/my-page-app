@@ -2,10 +2,14 @@ import { VerticalLinearStepper, Box, Button, Icon } from "@my-page/design-system
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TemplateTitle, TemplateSections, TemplatePages, TemplateColor, TemplateFonts } from ".";
+import { useCustomTemplateState } from "../hooks";
+
 
 export const CreateCustomTemplateStepper = () => {
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
+
+  const { customTemplate } = useCustomTemplateState();
 
   const handlePrevStep = () => {
     setActiveStep((step) => step - 1);
@@ -52,6 +56,7 @@ export const CreateCustomTemplateStepper = () => {
           },
         ]}
       />
+      
 
       <Box
         sx={{
@@ -95,7 +100,7 @@ export const CreateCustomTemplateStepper = () => {
           disabled={activeStep < 4}
           variant="contained"
           color="secondary"
-          onClick={() => navigate('/studio')}
+          onClick={() => console.log(customTemplate)}
           endIcon={
             (
               <Icon fontSize="medium">
