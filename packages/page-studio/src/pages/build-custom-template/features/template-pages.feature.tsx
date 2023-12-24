@@ -1,7 +1,6 @@
 import { List, Box, Text, IconButton, Icon, Autocomplete } from '@my-page/design-system';
 import { useState } from 'react';
-import { useRecoilState } from "recoil";
-import { templatePages } from "../../../store";
+import { useCustomTemplateState } from '../hooks';
 
 type ListItemProps = {
   title: string;
@@ -46,20 +45,24 @@ const pageOptions = [
 export const TemplatePages = () => {
   const [options, setOptions] = useState(pageOptions);
 
-  const [pagesStore, setPagesStore] = useRecoilState(templatePages);
+  const { pages: pagesStore } = useCustomTemplateState();
 
-  const [pages, setPages] = useState<any[]>([]);
+  const [pages, setPages] = pagesStore;
 
   const onRemovePage = (name: string) => {
-    setPages((prev) => prev.filter(item => item !== name));
     setOptions((prev) => [...prev, { name }]);
 
-    const clonedPages = {
-      ...pagesStore
-    } as any;
+    const clonedPages = [...pages].filter(item => item.name !== name);
 
-    delete clonedPages[name.toLowerCase()];
-    setPagesStore(clonedPages);
+    setPages(clonedPages);
+  }
+
+  const onAddPage = (newValue: { name: string }) => {
+    setOptions((prev) => prev.filter(item => item.name !== newValue?.name));
+
+    const clonedPages = [...pages, newValue];
+
+    setPages(clonedPages);
   }
 
   return (
@@ -69,8 +72,8 @@ export const TemplatePages = () => {
           [
             ...pages.map((page) => {
               return (
-                <ListItem 
-                  title={page}
+                <ListItem
+                  title={page.name}
                   onRemoveList={onRemovePage}
                 />
               );
@@ -87,17 +90,7 @@ export const TemplatePages = () => {
         }}
         onChange={(_, newValue) => {
           if(newValue) {
-            setPages((prev) => [
-              ...prev, 
-              newValue?.name
-            ]);
-
-            setOptions((prev) => prev.filter(item => item.name !== newValue?.name));
-
-            setPagesStore({
-              ...pagesStore,
-              [newValue.name]: '',
-            });
+            onAddPage(newValue);
           }
         }}
       />

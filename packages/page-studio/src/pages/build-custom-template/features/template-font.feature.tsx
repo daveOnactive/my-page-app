@@ -1,8 +1,7 @@
 import { Box, FontCard } from '@my-page/design-system';
-import { useRecoilState } from 'recoil';
-import { templateFonts } from '../../../store';
+import { useCustomTemplateState } from '../hooks';
 
-const fonts = [
+const fontList = [
   'monospace',
   'cursive',
   'fantasy',
@@ -12,7 +11,10 @@ const fonts = [
 ];
 
 export const TemplateFonts = () => {
-  const [selectedFont, setSelectedFont] = useRecoilState(templateFonts);
+
+  const { fonts } = useCustomTemplateState();
+
+  const [selectedFont, setSelectedFont] = fonts
 
   const handleFontClick = (font: string) => {
     setSelectedFont(font);
@@ -28,7 +30,7 @@ export const TemplateFonts = () => {
       }}
     >
       {
-        fonts.map((item) => (
+        fontList.map((item) => (
           <Box onClick={() => handleFontClick(item)}>
             <FontCard
               key={item}

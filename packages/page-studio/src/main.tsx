@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { DesignSystemProvider } from '@my-page/design-system';
 import {
@@ -18,7 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <AppNavigationProvider>
         <PageContainer>
           <RecoilRoot>
-            <RouterProvider router={router} />
+            <Suspense fallback={<>...</>}>
+              <RouterProvider router={router} />
+            </Suspense>
           </RecoilRoot>
         </PageContainer>
       </AppNavigationProvider>

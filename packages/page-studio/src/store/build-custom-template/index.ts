@@ -5,23 +5,32 @@ export const templateName = atom({
   default: ''
 });
 
-export const templateSection = atom({
-  key: 'template_sections',
-  default: {
+type TemplateSections = {
+  name: string;
+  value?: number;
+}
 
-  },
+type TemplateColor = {
+  name: string;
+  value?: any;
+  active?: string;
+}
+
+export const templateSections = atom<TemplateSections[]>({
+  key: 'template_sections',
+  default: [],
 });
 
-export const templatePages = atom({
-  key: 'template_sections',
-  default: {
-
-  },
+export const templatePages = atom<TemplateSections[]>({
+  key: 'template_pages',
+  default: [],
 });
 
-export const templateColors = atom({
+export const templateColors = atom<TemplateColor>({
   key: 'template_colors',
-  default: {}
+  default: {
+    name: '',
+  }
 });
 
 export const templateFonts = atom({

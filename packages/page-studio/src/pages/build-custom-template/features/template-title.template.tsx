@@ -1,16 +1,16 @@
 import { Box, Input } from "@my-page/design-system";
-import { useRecoilState } from 'recoil';
-import { templateName } from '../../../store';
 import { KEYS } from "../../../shared";
 import { useState } from "react";
+import { useCustomTemplateState } from "../hooks";
 
 type IProps = {
   handleNext: () => void;
 };
 
 export const TemplateTitle = (props: IProps) => {
-  const [value, setValue] = useRecoilState(templateName);
   const [isError, setIsError] = useState(false);
+  const { name } = useCustomTemplateState();
+  const [value, setValue] = name;
 
   return (
     <Box py={4} px={2}>
