@@ -16,7 +16,6 @@ export function RadioButtonsGroup({ radioGroup, onChange, value }: IProps) {
   return (
     <FormControl>
       <RadioGroup
-        row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
         value={value}

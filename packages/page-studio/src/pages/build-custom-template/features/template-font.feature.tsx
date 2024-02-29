@@ -22,7 +22,7 @@ export const TemplateFonts = () => {
   
   return (
     <Box 
-      m={2}
+      my={2}
       sx={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr',

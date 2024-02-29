@@ -120,7 +120,7 @@ export const TemplateColor = () => {
 
   return (
     <Box sx={{
-      m: 4
+      my: 2
     }}>
       <ColorSection
         name='light'
