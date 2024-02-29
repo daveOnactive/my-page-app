@@ -30,7 +30,7 @@ export const AppModalProvider = (props: PropsWithChildren) => {
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   return (
     <AppModalContext.Provider
@@ -53,5 +53,5 @@ export const AppModalProvider = (props: PropsWithChildren) => {
         withLogo={modalState?.withLogo}
       />
     </AppModalContext.Provider>
-  )
-}
+  );
+};

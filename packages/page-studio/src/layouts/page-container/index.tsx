@@ -21,6 +21,10 @@ export const PageContainer: FC<React.PropsWithChildren> = ({ children }) => {
                 name: 'Template',
                 link: '/templates'
               },
+              {
+                name: 'Support',
+                link: '#'
+              },
             ]}
             profile={{}}
             isLoggedIn={false}

@@ -32,7 +32,7 @@ const Sections = (props: SectionsProps) => {
     <Box
       sx={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
+        gridTemplateColumns: '1fr 1fr',
         gap: 2,
       }}
     >
@@ -40,18 +40,47 @@ const Sections = (props: SectionsProps) => {
       [1, 2, 3, 4, 5].map(item => (
         <Paper
           key={item}
+          dangerouslySetInnerHTML={
+           {
+            __html: `
+                      <html>
+                        <style>
+                          body {
+                            margin: 1rem;
+                          }
+                          nav {
+                            border: 1px solid #1111;
+                            width: 100%;
+                            height: 30px;
+                            display: block
+                          }
+
+                          .banner {
+                            border: 1px solid #1111;
+                            width: 100%;
+                            height: 80%;
+                          }
+
+                        </style>
+                        <body>
+                          <nav></nav>
+                          <section class='banner'></section>
+                        </body>
+                      </html>
+                    `
+           }
+          }
           onClick={() => handleSectionClick(item)}
-          sx={{
-            width: 150,
+          style={{
+            margin: '.5rem',
+            width: '100%',
             height: 150,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            // display: 'flex',
             cursor: 'pointer',
             border: pageSection?.value === item ? '1px solid black' : ''
           }}
           variant='outlined'
-        ></Paper>
+        />
       ))
     }
     </Box>
@@ -59,6 +88,9 @@ const Sections = (props: SectionsProps) => {
 }
 
 const pageSectionOptions = [
+  {
+    name: 'Banner'
+  },
   {
     name: 'Services / What we do'
   },

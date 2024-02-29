@@ -11,12 +11,33 @@ export const CreateCustomTemplateStepper = () => {
 
   const { customTemplate } = useCustomTemplateState();
 
+  const handleIsNextStepValid = () => {
+    switch(activeStep) {
+      case 0:
+        return customTemplate.name.length > 3;
+      case 1:
+        return customTemplate.sections.length;
+      case 2:
+        return customTemplate.pages.length;
+      case 3:
+        return !!customTemplate.colors.name;
+      case 4:
+        return !!customTemplate.fonts;
+      default:
+        return false;
+    }
+  }
+
+  const isNextStepValid = handleIsNextStepValid();
+
   const handlePrevStep = () => {
     setActiveStep((step) => step - 1);
   }
 
   const handleNextStep = () => {
-    setActiveStep((step) => step + 1);
+    if(isNextStepValid) {
+      setActiveStep((step) => step + 1);
+    }
   }
   
   return (
@@ -84,7 +105,7 @@ export const CreateCustomTemplateStepper = () => {
           sx={{
             mx: 2
           }}
-          disabled={activeStep === 4}
+          disabled={!isNextStepValid || activeStep === 4}
           onClick={handleNextStep}
           endIcon={
             (
@@ -100,7 +121,7 @@ export const CreateCustomTemplateStepper = () => {
           disabled={activeStep < 4}
           variant="contained"
           color="secondary"
-          onClick={() => console.log(customTemplate)}
+          onClick={() => navigate('/studio')}
           endIcon={
             (
               <Icon fontSize="medium">
