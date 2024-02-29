@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
 import Paper from '@mui/material/Paper';
 import { Button, Text as Typography } from '.';
+import { colors } from '@mui/material';
 
 type IProps = {
   steps: {
@@ -37,14 +38,13 @@ export function Stepper({ steps, handleComplete }: IProps) {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          height: 50,
-          pl: 2,
-          bgcolor: 'background.default',
+          p: 2,
+          bgcolor: colors.grey[300]
         }}
       >
-        <Typography fontWeight={600}>{steps[activeStep].label}</Typography>
+        <Typography>{steps[activeStep].label}</Typography>
       </Paper>
-      <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}>
+      <Box sx={{ height: '100%', width: '100%', py: 2 }}>
         {steps[activeStep].description}
       </Box>
       <MobileStepper

@@ -1,11 +1,30 @@
-import { Box, Input } from "@my-page/design-system";
-import { KEYS } from "../../../shared";
+import { Box, Input, RadioButtonsGroup, Text } from "@my-page/design-system";
+// import { KEYS } from "../../../shared";
 import { useState } from "react";
 import { useCustomTemplateState } from "../hooks";
 
 type IProps = {
-  handleNext: () => void;
+  // handleNext: () => void;
 };
+
+const radioGroup = [
+  {
+    value: 'portfolio',
+    label: 'Portfolio'
+  },
+  {
+    value: 'landing_page',
+    label: 'Landing Page'
+  },
+  {
+    value: 'agency',
+    label: 'Agency / Business'
+  },
+  {
+    value: 'count_down',
+    label: 'Count Down / Coming Soon'
+  }
+];
 
 export const TemplateTitle = (props: IProps) => {
   const [isError, setIsError] = useState(false);
@@ -13,7 +32,7 @@ export const TemplateTitle = (props: IProps) => {
   const [value, setValue] = name;
 
   return (
-    <Box py={4} px={2}>
+    <Box mt={2}>
       <Input
         variant="outlined"
         placeholder='Enter your business name'
@@ -32,14 +51,24 @@ export const TemplateTitle = (props: IProps) => {
           }
           setValue(ev.target.value);
         }}
-        onKeyDown={(ev) => {
-          if(ev.key === KEYS.enter && value.length > 3) {
-            props.handleNext();
-          } else {
-            setIsError(true);
-          }
-        }}
+        // onKeyDown={(ev) => {
+        //   if(ev.key === KEYS.enter && value.length > 3) {
+        //     props.handleNext();
+        //   } else {
+        //     setIsError(true);
+        //   }
+        // }}
       />
+
+      <Box mt={2}>
+        <Text mb={2}>
+          For what purpose will the website be used?
+        </Text>
+
+        <RadioButtonsGroup
+          radioGroup={radioGroup}
+        />
+      </Box>
     </Box>
   )
 }
