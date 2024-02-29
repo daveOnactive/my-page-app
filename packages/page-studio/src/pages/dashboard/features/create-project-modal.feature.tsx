@@ -1,5 +1,41 @@
-import { Text, Button, Box, Card, Icon, Link } from '@my-page/design-system';
+import { Text, Box, Card, Icon } from '@my-page/design-system';
 import { useNavigate } from 'react-router-dom';
+
+
+const returnProjects = () => {
+  return [
+    {
+      title: 'Website',
+      description: 'Build a personalized website that represent your company\'s value.',
+      icon: 'language',
+      href: '/build-custom-template',
+    },
+    {
+      title: 'E-commerce',
+      icon: 'storefront',
+      description: 'Owning an e-commerce website made easy.',
+      href: '#',
+    },
+    {
+      title: 'E-Learning',
+      icon: 'cast_for_education',
+      description: 'Build an E-learning platform that servers your students',
+      href: '#',
+    },
+    {
+      title: 'Dashboard',
+      icon: 'analytics',
+      description: 'Build a customizable dashboard that provides detailed statistics and record keeping.',
+      href: '#',
+    },
+    {
+      title: 'Finance',
+      icon: 'savings',
+      description: 'Build a customized financial application',
+      href: '#',
+    },
+  ]
+}
 
 export const CreateProjectModal = () => {
   const navigate = useNavigate();
@@ -17,50 +53,32 @@ export const CreateProjectModal = () => {
           gridGap: '16px'
         }}
         >
-          <Card
-            align='center'
-            title='Website'
-            icon={
-              (
-                <Icon fontSize='large'>
-                  language
-                </Icon>
-              )
-            }
-            variant='outlined'
-            body='Build person website'
-            sx={{cursor: 'pointer'}}
-            onClick={() => navigate('/build-custom-template')}
-          />
-          <Card
-            align='center'
-            title='E-commerce'
-            icon={
-              (
-                <Icon fontSize='large'>
-                  storefront
-                </Icon>
-              )
-            }
-            variant='outlined'
-            body='Build business E-commerce'
-          />
-          <Card
-            align='center'
-            title='Web Application'
-            icon={
-              (
-                <Icon fontSize='large'>
-                  computer
-                </Icon>
-              )
-            }
-            variant='outlined'
-            body='Build custom web application'
-          />
+          {
+            returnProjects().map((project) => {
+              return (
+                <Card
+                  align='center'
+                  title={project.title}
+                  className="material-symbols-contained"
+                  icon={
+                    (
+                      <Icon fontSize='large'>
+                        {project.icon}
+                      </Icon>
+                    )
+                  }
+                  variant='outlined'
+                  body={project.description}
+                  sx={{cursor: 'pointer'}}
+                  onClick={() => navigate(project.href)}
+                />
+              );
+            })
+          }
+
         </Box>
         
-        <Box display='flex' justifyContent='center'>
+        {/* <Box display='flex' justifyContent='center'>
           <Button
             component={Link}
             sx={{ my: 4 }} 
@@ -74,7 +92,7 @@ export const CreateProjectModal = () => {
           )}>
             Explore Templates
           </Button>
-        </Box>
+        </Box> */}
       </Box>
       
     </Box>

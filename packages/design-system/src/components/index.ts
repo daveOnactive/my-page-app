@@ -33,3 +33,5 @@ export * from './list';
 export const IconButton = MuiIconButton;
 export * from './font-card';
 export * from './autocomplete';
+export { Stepper } from './stepper';
+export { RadioButtonsGroup } from './radio-buttons-group';
