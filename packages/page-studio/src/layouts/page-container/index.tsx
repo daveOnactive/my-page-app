@@ -17,10 +17,10 @@ export const PageContainer: FC<React.PropsWithChildren> = ({ children }) => {
                 name: 'Dashboard',
                 link: '/'
               },
-              {
-                name: 'Template',
-                link: '/templates'
-              },
+              // {
+              //   name: 'Template',
+              //   link: '/templates'
+              // },
               {
                 name: 'Support',
                 link: '#'

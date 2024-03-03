@@ -1,13 +1,8 @@
 import { atom } from 'recoil';
 
-export const templateName = atom({
-  key: 'template_name',
-  default: ''
-});
-
 type TemplateSections = {
   name: string;
-  value?: number;
+  template?: string;
 }
 
 type TemplateColor = {
@@ -16,14 +11,25 @@ type TemplateColor = {
   active?: string;
 }
 
-export const templateSections = atom<TemplateSections[]>({
-  key: 'template_sections',
-  default: [],
+type TemplateName = {
+  name: string;
+  category?: string;
+}
+
+export const templateName = atom<TemplateName>({
+  key: 'template_name',
+  default: {
+    name: '',
+    category: '',
+  }
 });
 
-export const templatePages = atom<TemplateSections[]>({
-  key: 'template_pages',
-  default: [],
+export const templateSections = atom<TemplateSections>({
+  key: 'template_sections',
+  default: {
+    name: '',
+    template: '',
+  },
 });
 
 export const templateColors = atom<TemplateColor>({

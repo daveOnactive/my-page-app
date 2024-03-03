@@ -1,8 +1,11 @@
-import { Accordion, Box, Paper, IconButton, Icon, Text, Autocomplete } from "@my-page/design-system";
-// import { useState, useMemo } from "react";
-// import { useCustomTemplateState } from '../hooks';
+import { Box, Paper } from "@my-page/design-system";
+import { useCustomTemplateState } from '../hooks';
 
 export const TemplateSections = () => {
+
+  const { sections } = useCustomTemplateState();
+
+  const [ templateSection, setTemplateSection ] = sections;
 
   return (
     <Box
@@ -46,13 +49,19 @@ export const TemplateSections = () => {
                     `
            }
           }
-          // onClick={() => handleSectionClick(item)}
+          onClick={() => {
+            setTemplateSection({
+              name: `template_${item}`,
+              template: '',
+            })
+          }}
           style={{
             margin: '.5rem',
             width: '100%',
             height: 150,
             // display: 'flex',
             cursor: 'pointer',
+            border: templateSection?.name === `template_${item}` ? '1px solid black' : ''
           }}
           variant='outlined'
         />

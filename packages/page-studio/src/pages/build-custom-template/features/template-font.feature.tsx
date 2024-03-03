@@ -31,7 +31,7 @@ export const TemplateFonts = () => {
     >
       {
         fontList.map((item) => (
-          <Box onClick={() => handleFontClick(item)}>
+          <Box onClick={() => handleFontClick(item)} key={item}>
             <FontCard
               key={item}
               fontName={item}
