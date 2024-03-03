@@ -12,20 +12,21 @@ export const CreateCustomTemplateStepper = () => {
   const { customTemplate } = useCustomTemplateState();
 
   const handleIsNextStepValid = () => {
-    switch(activeStep) {
-      case 0:
-        return customTemplate.name.length > 3;
-      case 1:
-        return customTemplate.sections.length;
-      case 2:
-        return customTemplate.pages.length;
-      case 3:
-        return !!customTemplate.colors.name;
-      case 4:
-        return !!customTemplate.fonts;
-      default:
-        return false;
-    }
+    // switch(activeStep) {
+    //   case 0:
+    //     return customTemplate.name.length > 3;
+    //   case 1:
+    //     return customTemplate.sections.length;
+    //   case 2:
+    //     return customTemplate.pages.length;
+    //   case 3:
+    //     return !!customTemplate.colors.name;
+    //   case 4:
+    //     return !!customTemplate.fonts;
+    //   default:
+    //     return false;
+    // }
+    return false;
   }
 
   const isNextStepValid = handleIsNextStepValid();
@@ -67,7 +68,10 @@ export const CreateCustomTemplateStepper = () => {
             label: 'Fonts'
           }
         ]}
-        handleComplete={() => navigate('/studio')}
+        handleComplete={() => {
+          // navigate('/studio')
+          console.log(customTemplate);
+        }}
       />
     </Box>
   )
