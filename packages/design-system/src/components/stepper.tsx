@@ -10,25 +10,16 @@ type IProps = {
     label: React.ReactNode;
     description: React.ReactNode;
   }[];
-  handleComplete: () => void;
+  handleNext: () => void;
+  handlePrev: () => void;
+  activeStep: number;
+  isNextBtnValid?: boolean;
 };
 
-export function Stepper({ steps, handleComplete }: IProps) {
-  const [activeStep, setActiveStep] = React.useState(0);
+export function Stepper({ steps, handleNext, handlePrev, activeStep = 0, isNextBtnValid }: IProps) {
   const maxSteps = steps.length;
   const finalStep = activeStep === maxSteps - 1;
 
-  const handleNext = () => {
-    if(finalStep) {
-      handleComplete();
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -61,6 +52,7 @@ export function Stepper({ steps, handleComplete }: IProps) {
             onClick={handleNext}
             color="secondary"
             variant='contained'
+            disabled={isNextBtnValid}
           >
             {finalStep ? 'Complete' : 'Next'}
           </Button>
@@ -68,7 +60,7 @@ export function Stepper({ steps, handleComplete }: IProps) {
         backButton={
           <Button 
             size="small" 
-            onClick={handleBack} 
+            onClick={handlePrev} 
             disabled={activeStep === 0} 
             color="secondary"
             variant='contained'
