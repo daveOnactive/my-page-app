@@ -23,6 +23,10 @@ const radioGroup = [
   {
     value: 'count_down',
     label: 'Count Down / Coming Soon'
+  },
+    {
+    value: 'others',
+    label: 'Others'
   }
 ];
 

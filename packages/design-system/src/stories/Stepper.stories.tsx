@@ -41,6 +41,6 @@ type Story = StoryObj<typeof meta>;
 export const StepperComponent: Story = {
   args: {
     steps,
-    handleComplete: () => alert('Stepper is completed')
+    activeStep: 0,
   }
 };
