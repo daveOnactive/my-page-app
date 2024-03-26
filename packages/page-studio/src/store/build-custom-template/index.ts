@@ -19,15 +19,15 @@ type TemplateName = {
 export const templateName = atom<TemplateName>({
   key: 'template_name',
   default: {
-    name: '',
-    category: '',
+    name: 'testing',
+    category: 'portfolio',
   }
 });
 
 export const templateSections = atom<TemplateSections>({
   key: 'template_sections',
   default: {
-    name: '',
+    name: 'template_0',
     template: '',
   },
 });

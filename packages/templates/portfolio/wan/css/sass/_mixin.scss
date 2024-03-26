@@ -1,0 +1,56 @@
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transition($transition) {
+    transition: $transition;
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+}
+
+@mixin box-shadow($box-shadow) {
+    box-shadow: $box-shadow;
+    -webkit-box-shadow: $box-shadow;
+    -moz-box-shadow: $box-shadow;
+    -o-box-shadow: $box-shadow;
+}
+
+@mixin transformScaleX($transformrotate) {
+    transform: $transformrotate;
+    -webkit-transform: $transformrotate;
+    -moz-transform: $transformrotate;
+    -o-transform: $transformrotate;
+}
+
+@mixin transformScaleX($transformscalex) {
+    transform: $transformscalex;
+    -webkit-transform: $transformscalex;
+    -moz-transform: $transformscalex;
+    -o-transform: $transformscalex;
+}
+
+@mixin transformScaleY($transformscaley) {
+    transform: $transformscaley;
+    -webkit-transform: $transformscaley;
+    -moz-transform: $transformscaley;
+    -o-transform: $transformscaley;
+}
+
+@mixin transformTranslateX($transformtranslatex) {
+    transform: $transformtranslatex;
+    -webkit-transform: $transformtranslatex;
+    -moz-transform: $transformtranslatex;
+    -o-transform: $transformtranslatex;
+}
+
+@mixin transformTranslateY($transformtranslatey) {
+    transform: $transformtranslatey;
+    -webkit-transform: $transformtranslatey;
+    -moz-transform: $transformtranslatey;
+    -o-transform: $transformtranslatey;
+}

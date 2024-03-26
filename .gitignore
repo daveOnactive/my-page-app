@@ -5,3 +5,4 @@ migrations
 .env
 build
 .history
+.DS_Store
