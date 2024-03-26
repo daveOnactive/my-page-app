@@ -1,0 +1,105 @@
+/* LIGHT */
+
+/* :root {
+    --background: #f3eeea;
+    --text1: #01132d;
+    --text2: #292929;
+    --primary: #776b5d;
+    --secondary: #B0A695;
+    --paper: #ebe3d5;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
+
+/* :root {
+    --background: #efecec;
+    --text1: #01132d;
+    --text2: #292929;
+    --primary: #0c72d5;
+    --secondary: #B0A695;
+    --paper: #f9e8d9;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
+
+/* :root {
+    --background: #eeeeee;
+    --text1: #01132d;
+    --text2: #292929;
+    --primary: #3a98b9;
+    --secondary: #B0A695;
+    --paper: #aad7d9;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
+
+/* DARK */
+
+:root {
+    --background: #222831;
+    --text1: #fff;
+    --text2: #edecec;
+    --primary: #76abae;
+    --secondary: #B0A695;
+    --paper: #31363f;
+    --font: 'Roboto';
+    --btn-color: #fff;
+}
+
+/* :root {
+    --background: #35155d;
+    --text1: #fff;
+    --text2: #edecec;
+    --primary: #4477ce;
+    --secondary: #B0A695;
+    --paper: #512b81;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
+
+/* :root {
+    --background: #472d2d;
+    --text1: #fff;
+    --text2: #edecec;
+    --primary: #a77979;
+    --secondary: #B0A695;
+    --paper: #382424;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
+
+
+/* NATURAL */
+
+/* :root {
+    --background: #f5f0bb;
+    --text1: #001a40;
+    --text2: #292929;
+    --primary: #73a9ad;
+    --secondary: #B0A695;
+    --paper: #ebe3d5;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
+
+/* :root {
+    --background: #e4d0d0;
+    --text1: #001a40;
+    --text2: #292929;
+    --primary: #867070;
+    --secondary: #B0A695;
+    --paper: #d5b4b4;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
+
+/* :root {
+    --background: #ecf2ff;
+    --text1: #001a40;
+    --text2: #292929;
+    --primary: #867070;
+    --secondary: #B0A695;
+    --paper: #e5d1fa;
+    --font: 'Roboto';
+    --btn-color: #fff;
+} */
